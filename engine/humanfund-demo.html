@@ -1,0 +1,280 @@
+<title>HumanFund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F4F6FB; --surface:#FFFFFF; --surface-2:#EDF0F7;
+    --ink:#151C27; --muted:#586173; --faint:#8A93A6;
+    --line:#E2E6F0; --line-strong:#D0D6E4;
+    --accent:#4B63E6;
+    --teal:#0E9E97; --indigo:#5566E6; --green:#2E9E5B; --amber:#C6871B;
+    --red:#D93A40; --red-soft:#FBE8E8; --red-ink:#B3242A;
+    --good:#0E9E97; --good-soft:#DCF3F1; --good-ink:#0B7B75;
+    --shadow:0 1px 2px rgba(20,26,36,.04),0 10px 30px rgba(20,26,36,.07);
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --ground:#0C1119; --surface:#141C27; --surface-2:#1B2431;
+      --ink:#E8EDF4; --muted:#9AA4B6; --faint:#6C7787;
+      --line:#232C3A; --line-strong:#33404F;
+      --accent:#8496F6;
+      --teal:#28C3B9; --indigo:#8496F6; --green:#43C86F; --amber:#E0A43B;
+      --red:#F0656A; --red-soft:#2E1618; --red-ink:#F58A8E;
+      --good:#28C3B9; --good-soft:#0E2B2C; --good-ink:#5FDBD2;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C1119; --surface:#141C27; --surface-2:#1B2431;
+    --ink:#E8EDF4; --muted:#9AA4B6; --faint:#6C7787;
+    --line:#232C3A; --line-strong:#33404F;
+    --accent:#8496F6;
+    --teal:#28C3B9; --indigo:#8496F6; --green:#43C86F; --amber:#E0A43B;
+    --red:#F0656A; --red-soft:#2E1618; --red-ink:#F58A8E;
+    --good:#28C3B9; --good-soft:#0E2B2C; --good-ink:#5FDBD2;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;
+    letter-spacing:-.006em;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-feature-settings:"zero" 1}
+  .num{font-variant-numeric:tabular-nums}
+  .wrap{max-width:760px;margin:0 auto;padding:34px 24px 70px}
+
+  header{margin-bottom:22px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .glyph{width:38px;height:38px;border-radius:11px;background:linear-gradient(150deg,var(--teal),var(--accent));
+    display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:0 3px 12px color-mix(in srgb,var(--teal) 38%,transparent)}
+  .glyph svg{width:22px;height:22px}
+  h1{font-size:30px;font-weight:800;letter-spacing:-.03em;margin:0}
+  h1 span{color:var(--teal)}
+  .lede{color:var(--muted);font-size:16px;margin:0;max-width:60ch;text-wrap:balance}
+  .lede b{color:var(--ink)}
+
+  .controls{background:var(--surface);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);
+    padding:18px 20px;margin-bottom:16px;display:flex;flex-direction:column;gap:18px}
+  .toggle-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .toggle-lab{font-size:15px;font-weight:700}
+  .toggle-lab .st{font-family:"IBM Plex Mono";font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;margin-left:4px;
+    background:var(--red-soft);color:var(--red-ink)}
+  .toggle-lab .st.on{background:var(--good-soft);color:var(--good-ink)}
+  .switch{width:52px;height:30px;border-radius:16px;border:1px solid var(--line-strong);background:var(--surface-2);
+    position:relative;cursor:pointer;transition:background .2s,border-color .2s;flex-shrink:0;padding:0}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+    background:var(--faint);transition:transform .2s,background .2s}
+  .switch[aria-checked="true"]{background:var(--good-soft);border-color:var(--good)}
+  .switch[aria-checked="true"]::after{transform:translateX(22px);background:var(--good)}
+  .switch:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .toggle-hint{font-size:13px;color:var(--faint)}
+  .slider-row label{font-size:14.5px;color:var(--muted);display:block;margin-bottom:8px}
+  .slider-row label b{color:var(--ink);font-weight:700}
+  .slider-row label .wc{color:var(--red-ink);font-weight:700}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;
+    background:linear-gradient(90deg,var(--red) var(--fill,75%),var(--surface-2) var(--fill,75%));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    background:var(--red);border:3px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.25);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--red);
+    border:3px solid var(--surface);cursor:pointer}
+  input[type=range]:disabled{opacity:.5}
+  .pool-note{font-size:13px;color:var(--faint)}
+  .pool-note b{color:var(--ink);font-weight:700}
+
+  .hero{border-radius:15px;padding:20px 22px;margin-bottom:18px;border:1px solid;transition:background .3s,border-color .3s;
+    background:var(--red-soft);border-color:color-mix(in srgb,var(--red) 34%,transparent)}
+  .hero.safe{background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 34%,transparent)}
+  .hero-k{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;
+    color:var(--red-ink)}
+  .hero.safe .hero-k{color:var(--good-ink)}
+  .hero-v{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:4px 0 2px;color:var(--red-ink)}
+  .hero.safe .hero-v{color:var(--good-ink)}
+  .hero-sub{font-size:15px;color:var(--ink);font-weight:500}
+
+  .poolbar-label{display:flex;justify-content:space-between;font-size:12px;color:var(--faint);font-weight:600;margin-bottom:6px}
+  .poolbar{height:34px;border-radius:9px;overflow:hidden;display:flex;background:var(--surface-2);
+    border:1px solid var(--line);margin-bottom:6px}
+  .poolbar .seg{height:100%;transition:width .35s cubic-bezier(.4,0,.2,1);min-width:0}
+  .poolcap{font-size:12.5px;color:var(--faint);margin-bottom:22px}
+
+  .rows{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+  .row{display:grid;grid-template-columns:1fr;gap:6px}
+  .row .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .row .nm{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .row .nm .dot{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+  .row .nm .who{font-size:12px;font-weight:500;color:var(--faint)}
+  .row.attacker .nm .who{color:var(--red-ink);font-weight:600}
+  .row .val{font-size:14px;font-weight:700;white-space:nowrap}
+  .row .val .sh{color:var(--muted);font-weight:600;font-size:12.5px;margin-left:6px}
+  .track{height:14px;border-radius:7px;background:var(--surface-2);overflow:hidden}
+  .track .fill{height:100%;border-radius:7px;transition:width .35s cubic-bezier(.4,0,.2,1),background .3s}
+
+  .caption{font-size:14px;color:var(--muted);background:var(--surface);border:1px solid var(--line);
+    border-radius:13px;padding:16px 18px;line-height:1.55}
+  .caption b{color:var(--ink)}
+  .caption .src{display:block;margin-top:8px;font-size:12.5px;color:var(--faint)}
+
+  .theme{position:fixed;top:14px;right:14px;width:36px;height:36px;border:1px solid var(--line-strong);border-radius:9px;
+    background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;z-index:5}
+  .theme:hover{color:var(--ink);border-color:var(--accent)}
+  .theme svg{width:16px;height:16px}
+
+  @media (max-width:560px){h1{font-size:25px}.hero-v{font-size:36px}.lede{font-size:15px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<button type="button" class="theme" id="theme" aria-label="Toggle theme" title="Toggle theme">
+  <svg id="thi" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+</button>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3.4" fill="currentColor"/><path d="M5 20c0-3.9 3.1-6.6 7-6.6s7 2.7 7 6.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></span>
+      <h1>Human<span>Fund</span></h1>
+    </div>
+    <p class="lede">A $100 attacker can steal a third of a public funding pool by splitting into fake wallets. <b>Drag the attack up — then switch on InterLink personhood and watch it vanish.</b></p>
+  </header>
+
+  <div class="controls">
+    <div class="toggle-row">
+      <div class="toggle-lab">InterLink personhood <span class="st" id="pstate">OFF</span></div>
+      <button type="button" class="switch" id="switch" role="switch" aria-checked="false" aria-label="Toggle InterLink personhood"></button>
+      <div class="toggle-hint" id="phint">any wallet counts as a person</div>
+    </div>
+    <div class="slider-row">
+      <label>Attacker splits <b>$100</b> into <span class="wc" id="wcount">150</span> wallets</label>
+      <input type="range" id="wallets" min="1" max="200" value="150" aria-label="Number of attacker wallets">
+    </div>
+    <div class="pool-note">Matching pool <b>$10,000</b>, distributed by quadratic funding across 3 honestly-backed projects and 1 attacker.</div>
+  </div>
+
+  <div class="hero" id="hero">
+    <div class="hero-k" id="herok">Attacker captured</div>
+    <div class="hero-v num" id="herov">$0</div>
+    <div class="hero-sub" id="herosub"></div>
+  </div>
+
+  <div class="poolbar-label"><span>Share of the $10,000 pool</span><span id="poolright"></span></div>
+  <div class="poolbar" id="poolbar"></div>
+  <div class="poolcap">Each segment is one project's slice of the matching pool.</div>
+
+  <div class="rows" id="rows"></div>
+
+  <div class="caption">
+    Quadratic funding matches projects by how many <i>distinct</i> backers they have — the mechanism behind Gitcoin — so an attacker who splits one budget across many wallets multiplies their own match. Gitcoin and Human Passport spend millions on sybil defense to fight exactly this. On InterLink, <b>one human is one account</b>, so the split is impossible and the same attack collapses to zero. <b>Same money. One human. No split.</b>
+    <span class="src">Powered by the same quadratic-funding engine verified in the HumanFund spike (Python, 7/7 tests). Numbers here are computed live in your browser.</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement;
+  // theme
+  var btn=document.getElementById("theme"), thi=document.getElementById("thi");
+  function sysDark(){return matchMedia("(prefers-color-scheme:dark)").matches;}
+  function curDark(){var t=root.getAttribute("data-theme");return t?t==="dark":sysDark();}
+  function icon(){thi.innerHTML=curDark()
+    ? '<circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+    : '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>';}
+  btn.onclick=function(){root.setAttribute("data-theme",curDark()?"light":"dark");icon();};
+  icon();
+
+  // --- funding round model ---
+  var POOL=10000, BUDGET=100;
+  // honest projects: subsidy = rootSum^2 - raw  (rootSum = sum of sqrt of each donor's gift)
+  var HONEST=[
+    {name:"Clean Water Fund", donors:42, raw:315, rootSum:115.0, color:"var(--teal)"},
+    {name:"Open Textbooks",   donors:28, raw:350, rootSum:99.0,  color:"var(--indigo)"},
+    {name:"Village Solar",    donors:17, raw:255, rootSum:65.8,  color:"var(--green)"}
+  ];
+  function fmt(x){return "$"+Math.round(x).toLocaleString("en-US");}
+  function pct(x){return (x*100).toFixed(1)+"%";}
+
+  function compute(wallets, poh){
+    var projs=HONEST.map(function(p){
+      return {name:p.name, who:p.donors+" real donors", raw:p.raw, color:p.color,
+              subsidy:Math.max(0,p.rootSum*p.rootSum-p.raw), attacker:false};
+    });
+    // attacker: splitting $100 into n wallets gives subsidy 100*(n-1); one human gives 0
+    var aSub = poh ? 0 : BUDGET*(wallets-1);
+    projs.push({name:"SybilDAO", who: poh? "1 human, $100" : (wallets+" fake wallets, $100"),
+                raw:BUDGET, color:"var(--red)", subsidy:aSub, attacker:true});
+    var total=projs.reduce(function(s,p){return s+p.subsidy;},0)||1;
+    projs.forEach(function(p){p.share=p.subsidy/total; p.match=POOL*p.share;});
+    return projs;
+  }
+
+  var rowsEl=document.getElementById("rows"),
+      poolbarEl=document.getElementById("poolbar"),
+      hero=document.getElementById("hero"),
+      herok=document.getElementById("herok"),
+      herov=document.getElementById("herov"),
+      herosub=document.getElementById("herosub"),
+      poolright=document.getElementById("poolright"),
+      slider=document.getElementById("wallets"),
+      wcount=document.getElementById("wcount"),
+      sw=document.getElementById("switch"),
+      pstate=document.getElementById("pstate"),
+      phint=document.getElementById("phint");
+
+  var personhood=false;
+
+  function render(){
+    var wallets=parseInt(slider.value,10);
+    wcount.textContent=wallets;
+    slider.style.setProperty("--fill",(wallets/200*100)+"%");
+    var projs=compute(wallets, personhood);
+    var maxMatch=Math.max.apply(null,projs.map(function(p){return p.match;}))||1;
+    var attacker=projs.filter(function(p){return p.attacker;})[0];
+    var honestMax=Math.max.apply(null,projs.filter(function(p){return !p.attacker;}).map(function(p){return p.match;}));
+
+    // rows (fixed order: honest then attacker)
+    rowsEl.innerHTML=projs.map(function(p){
+      var w=(p.match/maxMatch*100).toFixed(1);
+      return '<div class="row'+(p.attacker?' attacker':'')+'">'
+        +'<div class="top"><div class="nm"><span class="dot" style="background:'+p.color+'"></span>'
+        +p.name+' <span class="who">'+p.who+'</span></div>'
+        +'<div class="val num">'+fmt(p.match)+'<span class="sh">'+pct(p.share)+'</span></div></div>'
+        +'<div class="track"><div class="fill" style="width:'+w+'%;background:'+p.color+'"></div></div></div>';
+    }).join("");
+
+    // pool stacked bar
+    poolbarEl.innerHTML=projs.map(function(p){
+      return '<div class="seg" style="width:'+(p.share*100).toFixed(2)+'%;background:'+p.color+'" title="'+p.name+' '+pct(p.share)+'"></div>';
+    }).join("");
+
+    // hero
+    if(personhood){
+      hero.classList.add("safe");
+      herok.textContent="Attack neutralized";
+      herov.textContent="$0";
+      herosub.innerHTML="The same $100 buys <b>one</b> honest vote. Splitting into wallets does nothing — there is only one of them.";
+      poolright.textContent="attacker: 0.0%";
+    }else{
+      hero.classList.remove("safe");
+      herok.textContent="Attacker captured";
+      herov.textContent=fmt(attacker.match);
+      var top = attacker.match>=honestMax;
+      herosub.innerHTML=pct(attacker.share)+" of the pool"
+        + (top? " — <b>more than any honestly-funded project</b>, on $100." : " — from a single $100 budget.");
+      poolright.textContent="attacker: "+pct(attacker.share);
+    }
+  }
+
+  slider.addEventListener("input", render);
+  function setPoh(v){
+    personhood=v;
+    sw.setAttribute("aria-checked", v?"true":"false");
+    pstate.textContent=v?"ON":"OFF";
+    pstate.classList.toggle("on",v);
+    phint.textContent=v?"one human = one account":"any wallet counts as a person";
+    slider.disabled=v;
+    render();
+  }
+  sw.addEventListener("click", function(){setPoh(!personhood);});
+  render();
+})();
+</script>

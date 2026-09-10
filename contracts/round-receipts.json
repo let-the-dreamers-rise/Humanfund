@@ -1,0 +1,41 @@
+{
+  "network": "sepolia",
+  "rpc": "https://ethereum-sepolia-rpc.publicnode.com",
+  "issuer": "0x2085da86B7b4c6800c44a8207D8DF0bA0C868736",
+  "actors": {
+    "humanA": "0x268ce6E155780c73cc4284fF029968d27961a718",
+    "humanB": "0x0895244BF871B7324E538a0931349A8d47a0c863",
+    "humanC": "0xCeFc24cFB2414B8b6a8e036B850259F3d3b4E19C",
+    "attacker": "0xa1C1929fb87D5b4d4C172DB2Ba215b13D828f6e8"
+  },
+  "txs": {
+    "fundA": "0x4deeebc1517205ba47a048c128f39454740812564b9c9f3e90cfbc951b23e1b6",
+    "fundB": "0xc7e84c0647f05a85208ddbc94b3f23ae3c469ded64bd9aa2345ce9210fa5568d",
+    "fundC": "0xa0802cee2faf30c8d69430083ffd37c00378047a6f83d3767366d9cd56693da1",
+    "fundATK": "0xb6e7b048d255bd73c8e4f638e9a4a4224a26cc7a4c9d0c413bee679116b0207c",
+    "deploy": "0x47b55bd7fbf6ce9be3dc86859d5a636309f6040df2298223e7ef2a0c38e388cc",
+    "addP0": "0x4e06b737515d16d8e84a0a3d865742e94189f6e158e52864efe5db828c842c44",
+    "addP1": "0x5bdc7f2b82b5749a7234b2d04c68ce331c4bed5d46053f67004f2f4d5018e896",
+    "contribA": "0xf0d43678eb43a6511e399c3537c228f0f42926d48eebbd0525797f0b94c1f57f",
+    "contribB": "0x51ab5b7e5f717df5b0aeec29f36066abfb2b91a9a14ff4df37835f5c49dd433f",
+    "contribC": "0x621389ca63de0f3f0d9f654cc7b5bee6e4b824b76fa3c7df953d46fc9a6ca727",
+    "sybilReverted": "0x41c7c881fa28c0c8eb4d5b07e1177e9a2234e5e251addeecfb159b1c714fe42d",
+    "finalize": "0x0d85a02f3003dfa6c02f129a3eabf82adece6b2af4ba2d164158d1cd37d59810"
+  },
+  "contract": "0x14fbF62C2eEAC774515F1301e84d9611197d0A67",
+  "result": [
+    {
+      "id": 0,
+      "name": "Clean Water Coalition",
+      "sumContrib": "0.002",
+      "match": "0.02"
+    },
+    {
+      "id": 1,
+      "name": "SybilDAO",
+      "sumContrib": "0.004",
+      "match": "0.0"
+    }
+  ],
+  "finalizedAt": "2026-09-10T22:22:53.053Z"
+}

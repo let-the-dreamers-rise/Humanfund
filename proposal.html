@@ -1,0 +1,276 @@
+<title>HumanFund Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F4F6FB; --surface:#FFFFFF; --surface-2:#EEF1F8;
+    --ink:#161C27; --muted:#586173; --faint:#8A93A6;
+    --line:#E2E6F0; --line-strong:#D0D6E4;
+    --accent:#4B63E6; --accent-soft:#E7EAFD;
+    --human:#0E9E97; --human-soft:#DCF3F1; --human-ink:#0B7B75;
+    --business:#B8801E; --business-soft:#F7EDD6;
+    --red:#D93A40; --red-soft:#FBE8E8; --red-ink:#B3242A;
+    --pos:#1E9E52;
+    --shadow:0 1px 2px rgba(20,26,36,.04),0 10px 30px rgba(20,26,36,.07);
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --ground:#0C1119; --surface:#141C27; --surface-2:#1B2431;
+      --ink:#E8EDF4; --muted:#9AA4B6; --faint:#6C7787;
+      --line:#232C3A; --line-strong:#33404F;
+      --accent:#8496F6; --accent-soft:#1D2740;
+      --human:#28C3B9; --human-soft:#0E2B2C; --human-ink:#5FDBD2;
+      --business:#E0A43B; --business-soft:#2E2515;
+      --red:#F0656A; --red-soft:#2E1618; --red-ink:#F58A8E;
+      --pos:#3ECB72;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0C1119; --surface:#141C27; --surface-2:#1B2431;
+    --ink:#E8EDF4; --muted:#9AA4B6; --faint:#6C7787;
+    --line:#232C3A; --line-strong:#33404F;
+    --accent:#8496F6; --accent-soft:#1D2740;
+    --human:#28C3B9; --human-soft:#0E2B2C; --human-ink:#5FDBD2;
+    --business:#E0A43B; --business-soft:#2E2515;
+    --red:#F0656A; --red-soft:#2E1618; --red-ink:#F58A8E;
+    --pos:#3ECB72;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hanken Grotesk",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;
+    letter-spacing:-.006em;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-feature-settings:"zero" 1}
+  .num{font-variant-numeric:tabular-nums}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  ::selection{background:var(--accent-soft)}
+  .page{max-width:760px;margin:0 auto;padding:0 26px 90px}
+
+  .mast{padding:52px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  .eyebrow{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .brandline{display:flex;align-items:center;gap:13px;margin:16px 0 8px}
+  .glyph{width:44px;height:44px;border-radius:12px;background:linear-gradient(150deg,var(--human),var(--accent));display:grid;place-items:center;color:#fff;flex-shrink:0;box-shadow:0 4px 14px color-mix(in srgb,var(--human) 38%,transparent)}
+  .glyph svg{width:25px;height:25px}
+  h1{font-size:41px;font-weight:800;letter-spacing:-.035em;margin:0;line-height:1}
+  h1 span{color:var(--human)}
+  .lede{font-size:18.5px;line-height:1.5;color:var(--muted);margin:16px 0 0;text-wrap:balance;max-width:60ch}
+  .lede b{color:var(--ink);font-weight:600}
+
+  .ask{background:var(--surface);border:1px solid var(--line-strong);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin:0 0 44px}
+  .ask-top{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+  .ask-cell{background:var(--surface);padding:17px 20px}
+  .ask-cell .k{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .ask-cell .v{font-size:23px;font-weight:800;letter-spacing:-.02em;margin-top:5px;line-height:1.1}
+  .ask-cell .v small{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+  .ask-foot{padding:15px 20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:13.5px;color:var(--muted)}
+  .ask-foot .live{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--human-ink)}
+  .ask-foot .live .dot{width:7px;height:7px;border-radius:50%;background:var(--human);box-shadow:0 0 0 3px var(--human-soft)}
+
+  section{margin:0 0 40px}
+  h2{font-size:14px;font-weight:700;letter-spacing:.02em;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
+  h2 .no{font-family:"IBM Plex Mono";font-size:12px;color:var(--accent);font-weight:600}
+  h2 .t{font-size:23px;font-weight:800;letter-spacing:-.025em}
+  section > p{margin:14px 0;max-width:66ch}
+  p b{font-weight:600}
+  .hl{color:var(--human-ink);font-weight:600}
+
+  .checks{list-style:none;padding:0;margin:16px 0;display:flex;flex-direction:column;gap:12px}
+  .checks li{display:flex;gap:12px;align-items:flex-start;font-size:15.5px;line-height:1.5}
+  .checks li .ic{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:var(--human-soft);color:var(--human-ink);display:grid;place-items:center;margin-top:1px}
+  .checks li .ic svg{width:13px;height:13px}
+  .checks li b{font-weight:700}
+
+  .callout{background:var(--surface);border:1px solid var(--line-strong);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;margin:16px 0;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .callout .big{font-size:30px;font-weight:800;letter-spacing:-.02em}
+  .callout .big .off{color:var(--red-ink)}
+  .callout .big .arrow{color:var(--faint);margin:0 8px}
+  .callout .big .on{color:var(--human-ink)}
+  .callout .cx{flex:1;min-width:220px;font-size:14px;color:var(--muted)}
+  .callout .cx b{color:var(--ink)}
+  .callout a.try{display:inline-block;margin-top:4px;font-weight:600}
+
+  .tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:540px}
+  thead th{background:var(--surface-2);text-align:left;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600;padding:11px 15px;border-bottom:1px solid var(--line)}
+  tbody td{padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr{background:var(--surface)}
+  .mid{font-family:"IBM Plex Mono";font-weight:600;color:var(--accent)}
+  .amt{font-weight:700;white-space:nowrap;text-align:right}
+  .done{display:inline-block;font-size:11px;font-weight:700;color:var(--pos);background:color-mix(in srgb,var(--pos) 14%,transparent);padding:2px 8px;border-radius:20px}
+  .gate{font-size:12.5px;color:var(--business);font-weight:600}
+  tfoot td{padding:13px 15px;font-weight:800;background:var(--surface-2);border-top:2px solid var(--line-strong)}
+
+  .req{list-style:none;padding:0;margin:16px 0;display:flex;flex-direction:column;gap:10px}
+  .req li{display:flex;gap:13px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;align-items:flex-start}
+  .req li .n{font-family:"IBM Plex Mono";font-weight:700;color:var(--accent);flex-shrink:0}
+  .req li .b b{font-weight:700}
+  .req li .b div{color:var(--muted);font-size:14px;margin-top:2px}
+
+  .note{font-size:13.5px;color:var(--faint);border-left:3px solid var(--line-strong);padding:2px 0 2px 14px;margin:16px 0}
+
+  footer{margin-top:46px;padding-top:26px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:flex-end}
+  footer .who .nm{font-size:16px;font-weight:700}
+  footer .who .ct{font-size:14px;color:var(--muted);margin-top:3px}
+  footer .cta{font-size:14px;font-weight:600}
+  .theme{position:fixed;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;z-index:5}
+  .theme:hover{color:var(--ink);border-color:var(--accent)}
+  .theme svg{width:17px;height:17px}
+
+  @media (max-width:620px){
+    h1{font-size:32px}.lede{font-size:16.5px}
+    .ask-top{grid-template-columns:1fr;gap:1px}
+    h2 .t{font-size:20px}.mast{padding-top:40px}
+    .callout .big{font-size:24px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<button type="button" class="theme" id="theme" aria-label="Toggle theme" title="Toggle theme">
+  <svg id="thi" viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+</button>
+
+<div class="page">
+  <div class="mast">
+    <div class="eyebrow">Grant Proposal &middot; InterLink Foundation Builder Program</div>
+    <div class="brandline">
+      <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3.4" fill="currentColor"/><path d="M5 20c0-3.9 3.1-6.6 7-6.6s7 2.7 7 6.6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg></span>
+      <h1>Human<span>Fund</span></h1>
+    </div>
+    <p class="lede">Sybil-proof funding for the human chain &mdash; the one place quadratic funding actually works, because the attacker <b>can't be a hundred people</b>. Starting with the Foundation's own Phase 3 grant round.</p>
+  </div>
+
+  <div class="ask">
+    <div class="ask-top">
+      <div class="ask-cell"><div class="k">Amount requested</div><div class="v">$48,000<small> USD</small></div></div>
+      <div class="ask-cell"><div class="k">Duration</div><div class="v">15<small> weeks</small></div></div>
+      <div class="ask-cell"><div class="k">Structure</div><div class="v">Milestone<small>-gated</small></div></div>
+    </div>
+    <div class="ask-foot">
+      <span class="live"><span class="dot"></span>3 working proofs already live</span>
+      <span>Up to 40% payable in ITLG / vITLG</span>
+      <span>Also requested: testnet RPC + consent-gated personhood read</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span><span class="t">The problem already on your desk</span></h2>
+    <p>You are about to hand out <b>Phase 3 builder grants</b>. How do you allocate them fairly? An opaque committee invites capture and favouritism claims &mdash; the exact criticism aimed at every foundation that funds its own ecosystem. The gold-standard answer is a <b>community-weighted quadratic funding round</b> (Gitcoin's mechanism): the crowd decides, and breadth of support beats size of wallet.</p>
+    <p>There is one catch, and it has blocked quadratic funding for a decade: it is <b>trivially sybil-attackable</b>. Split one budget across many wallets and you multiply your own match. Gitcoin and Human Passport spend <b>millions</b> on sybil defense to patch this, and still leak. You are the one chain where that defense is <span class="hl">free and structural</span> &mdash; because every account is already a verified unique human.</p>
+    <p>And the demand is not speculative. Sybil-proof funding is one of the most validated needs in the space: Human Passport has secured <b>$512M+ in capital flow</b> across 120+ projects, Story Protocol used it to protect a <b>$98M airdrop</b>, and Gitcoin has run community funding rounds for years. The appetite is enormous and proven &mdash; what has never existed is a chain where the defense is free instead of a millions-of-dollars arms race. That chain is <b>yours</b>, and the first customer is <b>you</b>.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span><span class="t">What HumanFund is</span></h2>
+    <p>A sybil-proof funding and allocation platform for InterLink: quadratic funding rounds and fair distribution where <span class="hl">one human is one vote</span>, enforced by the chain, not approximated by a scoring heuristic.</p>
+    <ul class="checks">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Sybil-proof by construction.</b> The attack that breaks Gitcoin cannot run here &mdash; one human cannot become a hundred contributors.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Transparent and on-chain.</b> Every contribution and every match is public and verifiable &mdash; the opposite of a closed committee spreadsheet.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Reusable by the whole ecosystem.</b> Once it runs your grants, any project on the chain can run a sybil-proof round, airdrop, or community vote on the same rails.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Reputation that compounds.</b> Because a human can't start over, honest participation builds an inescapable, portable reputation &mdash; the second product on the same primitive.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span><span class="t">The proof is already built</span></h2>
+    <p>Most applicants ask you to imagine the core claim. I have already proven it, and you can run it yourself before you decide.</p>
+    <div class="callout">
+      <div class="big"><span class="off">37%</span><span class="arrow">&rarr;</span><span class="on">0%</span></div>
+      <div class="cx">A $100 attacker captures <b>37% of a $10,000 pool</b> by splitting into wallets &mdash; the single largest payout. Flip on InterLink personhood and the same attack collapses to <b>$0</b>, with the money flowing back to real projects.
+        <a class="try" href="https://claude.ai/code/artifact/99290bfa-a165-4a85-b7db-1b9995b0db97">&rarr; Try the live demo</a></div>
+    </div>
+    <ul class="checks">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>A source-verified contract that ran a full sybil-proof round on-chain.</b> Deployed and source-verified (Sourcify, exact match) on Sepolia at <a href="https://sepolia.etherscan.io/address/0x14fbF62C2eEAC774515F1301e84d9611197d0A67" class="mono">0x14fb&hellip;0A67</a>. I ran a complete round end-to-end: two humans backed one project, a rival wallet put <b>twice the money</b> into another, and a sybil tried to forge a second backer. After <a href="https://sepolia.etherscan.io/tx/0x0d85a02f3003dfa6c02f129a3eabf82adece6b2af4ba2d164158d1cd37d59810">finalize()</a> the two-human project took the <b>entire matching pool</b>, the richer single-backer project got <b>zero</b>, and the sybil's contribution <a href="https://sepolia.etherscan.io/tx/0x41c7c881fa28c0c8eb4d5b07e1177e9a2234e5e251addeecfb159b1c714fe42d">reverted on-chain</a>. Not a description &mdash; transactions you can scroll.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>A correct quadratic-funding engine</b> &mdash; the sybil-neutralisation is covered by a passing test suite, not a slide.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>A reorg-safe indexer</b>, already running against a live EVM chain, that tracks contributions and eligibility. Pointing it at InterLink is a one-line change.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Discipline you can audit.</b> Before this, I tested and rejected two bigger swings &mdash; a cross-chain personhood oracle (dominated by World ID) and human credit (a lending graveyard). I bring you the bet that survives scrutiny, not the first exciting one.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span><span class="t">Why it's yours to fund, not to build in-house</span></h2>
+    <p>A foundation that both funds its ecosystem <i>and</i> runs the allocation invites exactly the capture claim you want to avoid. An <b>independent, transparent, sybil-proof allocator</b> is more credible precisely because it isn't you &mdash; the same reason Gitcoin sits outside the chains it funds. And it depends on a personhood read <b>you control</b>: you keep the leverage, you fund a neutral rail you could not credibly operate yourself, and it becomes public infrastructure every project on the chain reuses. World ID cannot enter this &mdash; it lives on other chains and forbids the persistent identity this needs.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span><span class="t">The objections I'd raise from your chair</span></h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>The objection I'd raise</th><th>How this proposal answers it</th></tr></thead>
+        <tbody>
+          <tr><td><b>"Gitcoin already does quadratic funding."</b></td><td>And it is sybil-vulnerable, which is why they and Human Passport spend millions on defense that still leaks. On InterLink the defense is free and structural &mdash; a durable advantage they cannot copy without your chain. Gitcoin also isn't here.</td></tr>
+          <tr><td><b>"We'll just allocate grants with a committee."</b></td><td>A closed committee is the capture criticism, not the cure. A transparent sybil-proof round is more defensible, more on-thesis, and &mdash; unlike a spreadsheet &mdash; becomes reusable infrastructure for every project on the chain.</td></tr>
+          <tr><td><b>"Personhood stops sybils, but not bribery or collusion."</b></td><td>True, and I won't pretend otherwise. Personhood removes the cheap attack (one person as many); the expensive attacks (real humans colluding) are bounded by contribution caps, connection-oriented matching, and full transparency &mdash; on the M3 roadmap, and honestly out of scope for v1.</td></tr>
+          <tr><td><b>"Solo builder &mdash; bus factor."</b></td><td>Open-source core, an ops runbook at M4, and a portable data model. You are never locked to one person.</td></tr>
+          <tr><td><b>"No users &mdash; where's the demand?"</b></td><td>The demand is documented, not hoped-for: it is in <b>your own roadmap</b> (Phase 3 opens builder grants that need fair allocation) and proven at category scale ($512M+ secured via Human Passport, a $98M airdrop protected). Customer zero is you &mdash; your first grant round is the pilot, so the grantor and the first user are the same entity. There is no two-sided market to cold-start.</td></tr>
+          <tr><td><b>"Grant-and-run risk."</b></td><td>Three working artifacts shipped before asking for a cent, and every payment is milestone-gated on delivery.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span><span class="t">Milestones &amp; deliverables</span></h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>Deliverable</th><th>Window</th><th>Unlocks</th><th class="amt">Payment</th></tr></thead>
+        <tbody>
+          <tr><td class="mid">M0</td><td><b>Proof of execution.</b> QF engine (tested), interactive demo, reorg-safe indexer, and a full sybil-proof round executed and source-verified on Sepolia.<br><span class="done">Delivered</span></td><td class="mono">Wk 0</td><td class="gate">&mdash;</td><td class="amt num">$0</td></tr>
+          <tr><td class="mid">M1</td><td><b>The first real round.</b> On-chain QF round contracts + personhood-gated contribution; run one live sybil-proof round on testnet &mdash; your pilot Phase 3 grant round.</td><td class="mono">Wk 1&ndash;5</td><td class="gate">needs RPC + personhood read</td><td class="amt num">$16,000</td></tr>
+          <tr><td class="mid">M2</td><td><b>The platform.</b> Project onboarding, repeatable rounds, matching-pool management, and a public transparency dashboard (reuses the indexer).</td><td class="mono">Wk 6&ndash;11</td><td class="gate">&mdash;</td><td class="amt num">$18,000</td></tr>
+          <tr><td class="mid">M3</td><td><b>Reputation layer.</b> Inescapable, personhood-bound contribution reputation other rounds and protocols can consume.</td><td class="mono">Wk 12&ndash;14</td><td class="gate">&mdash;</td><td class="amt num">$10,000</td></tr>
+          <tr><td class="mid">M4</td><td><b>Sustainability.</b> Platform-fee + run-a-round-as-a-service rails, ops runbook, handoff docs.</td><td class="mono">Wk 15</td><td class="gate">&mdash;</td><td class="amt num">$4,000</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="4">Total, paid on delivery</td><td class="amt num">$48,000</td></tr></tfoot>
+      </table>
+    </div>
+    <p class="note"><b>Where the money goes:</b> the reused parts are priced at zero &mdash; the indexer and QF engine already exist. The budget concentrates on the novel on-chain work: <b>M1 ($16k)</b> the sybil-proof round mechanics and personhood gating, and <b>M2 ($18k)</b> the platform. Solo builder, 15 weeks, contract-audit budget included in M1. Up to 40% payable in ITLG/vITLG. Paid per milestone, never up front.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">07</span><span class="t">Sustainability &mdash; not grant-dependent</span></h2>
+    <p>The grant funds the first round; the chain's own funding activity sustains the platform. Three revenue lines:</p>
+    <ul class="checks">
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Run-a-round-as-a-service</b> &mdash; a small platform fee on matching pools that third-party projects and DAOs run through HumanFund.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Sybil-proof distribution</b> &mdash; fair airdrops and allocations for launches that want guaranteed one-human-one-claim.</div></li>
+      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 10 17l9-10" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Reputation API</b> &mdash; the compounding contribution reputation, consumed by lenders, DAOs, and other rounds on the chain.</div></li>
+    </ul>
+    <p>If funding stopped after M4, HumanFund keeps running on the rounds the ecosystem puts through it.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">08</span><span class="t">The ask</span></h2>
+    <ul class="req">
+      <li><span class="n">01</span><div class="b"><b>$48,000 over 15 weeks, milestone-gated</b><div>Up to 40% payable in ITLG / vITLG. Paid on delivery of each milestone.</div></div></li>
+      <li><span class="n">02</span><div class="b"><b>Testnet RPC endpoint access</b><div>To run round contracts and index contributions. Required at M1.</div></div></li>
+      <li><span class="n">03</span><div class="b"><b>Consent-gated personhood read</b><div>A yes/no verification status + epoch, nothing more. Aggregate by default; per-address opt-in. No biometric data. Required at M1.</div></div></li>
+      <li><span class="n">04</span><div class="b"><b>One real pilot: your first Phase 3 grant round</b><div>Let HumanFund run one community-weighted grant round for the builder program. Non-exclusive, one round, fully transparent &mdash; the lowest-risk way to see it work on your own money.</div></div></li>
+    </ul>
+    <p>In return, InterLink gets a fair, sybil-proof way to allocate its own grants; the flagship demonstration that a chain of verified humans enables something no one else can run trustlessly; and reusable public infrastructure for every project on the chain &mdash; from a builder who proved the core claim before asking for the check.</p>
+  </section>
+
+  <footer>
+    <div class="who">
+      <div class="nm">Ashwin Goyal</div>
+      <div class="ct">ashwinthebest8@gmail.com</div>
+    </div>
+    <div class="cta"><a href="https://claude.ai/code/artifact/99290bfa-a165-4a85-b7db-1b9995b0db97">&rarr; Try the live HumanFund demo</a></div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById("theme"), thi=document.getElementById("thi");
+  function sysDark(){return matchMedia("(prefers-color-scheme:dark)").matches;}
+  function curDark(){var t=root.getAttribute("data-theme");return t?t==="dark":sysDark();}
+  function icon(){thi.innerHTML=curDark()
+    ? '<circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+    : '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>';}
+  btn.onclick=function(){root.setAttribute("data-theme",curDark()?"light":"dark");icon();};
+  icon();
+})();
+</script>
